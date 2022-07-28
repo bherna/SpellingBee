@@ -7,7 +7,7 @@ public class word_ClassFirst : MonoBehaviour
 
 
     //empty word 
-    private List<char> word;
+    private List<char> word = new List<char>();
 
 
 
@@ -29,6 +29,11 @@ public class word_ClassFirst : MonoBehaviour
     public void AddLetter(char letter)
     {
         word.Add(letter);
+    }
+
+    public int wordLength()
+    {
+        return word.Count;
     }
 
 
