@@ -5,7 +5,7 @@ using UnityEngine;
 public class gameClassFirst : MonoBehaviour
 {
 
-
+    word_ClassFirst word;
 
     void Start()
     {
@@ -13,20 +13,25 @@ public class gameClassFirst : MonoBehaviour
 
 
         //create an empty word
-        wordClassFirst word = new wordClassFirst();
+        word = new wordClassFirst();
 
     }
 
 
-    public void CheckWord()
+    //returns true if the word is a valid word (from the list of words)
+    public bool CheckWord()
     {
-        // check if the word is long enough
+        // check if the word is long enough (than three letters)
+        if (word > 3) return false;
 
         //check if the word includes the GOLD letter
+        if (word.HasGoldLetter(GoldLetter)) return false;
 
         //chcek if the word is an actual word (from the list)
 
     }
+
+  
 
     
 }
