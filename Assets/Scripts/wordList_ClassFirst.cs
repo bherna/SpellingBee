@@ -10,6 +10,23 @@ public class wordList_ClassFirst : MonoBehaviour
 
     //hold a list of the letters to be used from this word bank
     //golden letter is the first element, always
+    //letter order follows:
+    /*
+      
+     
+     [0] = middlemiddle (gold)
+
+     [1] = lefttop
+     [2] = leftbottom
+
+     [3] = righttop
+     [4] = rightbottom
+
+     [5] = middletop
+     [6] = middlebottom
+     
+     
+     */
     private List<char> letteresList = new List<char>();
 
 
@@ -17,7 +34,7 @@ public class wordList_ClassFirst : MonoBehaviour
     {
 
         //enter every letter use in this game
-        letteresList.Add('u');
+        letteresList.Add('u');  
         letteresList.Add('a');
         letteresList.Add('l');
         letteresList.Add('n');
@@ -35,6 +52,11 @@ public class wordList_ClassFirst : MonoBehaviour
     public char GoldenLetter()
     {
         return letteresList[0];
+    }
+
+    public char getLetter(int element)
+    {
+        return letteresList[element];
     }
 
     //checks if the word given is in contained in the word bank

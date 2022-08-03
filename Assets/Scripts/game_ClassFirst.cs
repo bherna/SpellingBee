@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//text mesh pro
+using TMPro;
+using System;
+
 public class game_ClassFirst : MonoBehaviour
 {
-
-
 
 
     //============variables===========================
@@ -16,11 +18,8 @@ public class game_ClassFirst : MonoBehaviour
     //holds the game's usable letters and words
     [SerializeField] wordList_ClassFirst wordList;
 
-
-
-
-
-
+    //displays the players current word
+    public TMP_Text playerWord_text;
 
     private void Start()
     {
@@ -34,14 +33,8 @@ public class game_ClassFirst : MonoBehaviour
         wordList = gameObject.AddComponent<wordList_ClassFirst>();
 
 
-
-
     }
 
-
-    
-
-    
 
     //returns true if the word is a valid word (from the list of words)
     public bool CheckWord()
@@ -62,12 +55,13 @@ public class game_ClassFirst : MonoBehaviour
     //button onclick events
     public void LeftTopButtonClick()
     {
-
+        playerWord.AddLetter(wordList.getLetter(1));
+        Debug.Log(playerWord.GetWord());
     }
 
     public void LeftBottomButtonClick()
     {
-
+        playerWord.AddLetter(wordList.getLetter(2));
     }
 
 
@@ -75,12 +69,12 @@ public class game_ClassFirst : MonoBehaviour
 
     public void RightTopButtonClick()
     {
-
+        playerWord.AddLetter(wordList.getLetter(3));
     }
 
     public void RightBottomButtonClick()
     {
-
+        playerWord.AddLetter(wordList.getLetter(4));
     }
 
 
@@ -88,17 +82,17 @@ public class game_ClassFirst : MonoBehaviour
 
     public void MiddleTopButtonClick()
     {
-
+        playerWord.AddLetter(wordList.getLetter(5));
     }
 
     public void MiddleMiddleButtonClick()
     {
-
+        playerWord.AddLetter(wordList.GoldenLetter());
     }
 
     public void MiddleBottomButtonClick()
     {
-
+        playerWord.AddLetter(wordList.getLetter(6));
     }
   
 }

@@ -17,12 +17,20 @@ public class word_ClassFirst : MonoBehaviour
         if (newWord.Length > 0) SetWord(newWord);
     }
 
+
+
     private void SetWord(string newWord)
     {
         foreach(char letter in newWord){
 
             word.Add(letter);
         }
+    }
+
+    //get/return the word of the player
+    public string GetWord()
+    {
+        return word.ToString();
     }
 
     //will add a letter at the end of a word
