@@ -5,11 +5,41 @@ using UnityEngine;
 public class game_ClassFirst : MonoBehaviour
 {
 
+
+
+
+    //============variables===========================
+
     //holds the player's word
-    word_ClassFirst playerWord = new word_ClassFirst(null);
+    [SerializeField] word_ClassFirst playerWord;
 
     //holds the game's usable letters and words
-    wordList_ClassFirst wordList = new wordList_ClassFirst();
+    [SerializeField] wordList_ClassFirst wordList;
+
+
+
+
+
+
+
+    private void Start()
+    {
+
+        //============variables===========================
+
+        //holds the player's word
+        playerWord = gameObject.AddComponent<word_ClassFirst>();
+
+        //holds the game's usable letters and words
+        wordList = gameObject.AddComponent<wordList_ClassFirst>();
+
+
+
+
+    }
+
+
+    
 
     
 
@@ -27,5 +57,48 @@ public class game_ClassFirst : MonoBehaviour
 
     }
 
+
+
+    //button onclick events
+    public void LeftTopButtonClick()
+    {
+
+    }
+
+    public void LeftBottomButtonClick()
+    {
+
+    }
+
+
+
+
+    public void RightTopButtonClick()
+    {
+
+    }
+
+    public void RightBottomButtonClick()
+    {
+
+    }
+
+
+
+
+    public void MiddleTopButtonClick()
+    {
+
+    }
+
+    public void MiddleMiddleButtonClick()
+    {
+
+    }
+
+    public void MiddleBottomButtonClick()
+    {
+
+    }
   
 }
