@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class wordList_ClassFirst : MonoBehaviour
+public class wordBank_ClassFirst : MonoBehaviour
 {
 
     //hold every word possible for this game
-    private List<word_ClassFirst> wordBank = new List<word_ClassFirst>();
+    private List<string> wordBank;
 
     //hold a list of the letters to be used from this word bank
     //golden letter is the first element, always
@@ -27,11 +27,14 @@ public class wordList_ClassFirst : MonoBehaviour
      
      
      */
-    private List<char> letteresList = new List<char>();
+    private List<char> letteresList;
 
 
     private void Start()
     {
+
+        wordBank = new List<string>();
+        letteresList = new List<char>();
 
         //enter every letter use in this game
         letteresList.Add('u');  
@@ -43,8 +46,8 @@ public class wordList_ClassFirst : MonoBehaviour
         letteresList.Add('y');
 
         //enter every word into the word bank
-        wordBank.Add(new word_ClassFirst("lulu"));
-        wordBank.Add(new word_ClassFirst("yurt"));
+        wordBank.Add("lulu");
+        wordBank.Add("yurt");
         ///...
     }
 
@@ -60,7 +63,7 @@ public class wordList_ClassFirst : MonoBehaviour
     }
 
     //checks if the word given is in contained in the word bank
-    public bool IsWordInList(word_ClassFirst word)
+    public bool IsWordInList(string word)
     {
         if (wordBank.Contains(word)) return true;
         else return false;

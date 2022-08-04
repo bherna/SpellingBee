@@ -7,17 +7,15 @@ public class word_ClassFirst : MonoBehaviour
 
 
     //empty word 
-    private List<char> word = new List<char>();
+    private List<char> word;
 
-
-
-    public word_ClassFirst(string newWord)
+    private void Start()
     {
-        //if we dont want a set word, just set newWord to null
-        if (newWord.Length > 0) SetWord(newWord);
+
+        word = new List<char>();
     }
 
-
+    
 
     private void SetWord(string newWord)
     {

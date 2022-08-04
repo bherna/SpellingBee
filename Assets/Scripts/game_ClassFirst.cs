@@ -16,22 +16,19 @@ public class game_ClassFirst : MonoBehaviour
     [SerializeField] word_ClassFirst playerWord;
 
     //holds the game's usable letters and words
-    [SerializeField] wordList_ClassFirst wordList;
+    [SerializeField] wordBank_ClassFirst wordBank;
 
     //displays the players current word
     public TMP_Text playerWord_text;
 
+
+
     private void Start()
     {
+        playerWord = GameObject.Find("game").transform.GetChild(0).gameObject.GetComponent<word_ClassFirst>();
+        if (playerWord != null) { Debug.Log("adfsd" + playerWord.GetWord().ToString()); }
 
-        //============variables===========================
-
-        //holds the player's word
-        playerWord = gameObject.AddComponent<word_ClassFirst>();
-
-        //holds the game's usable letters and words
-        wordList = gameObject.AddComponent<wordList_ClassFirst>();
-
+        wordBank = GameObject.Find("game").transform.GetChild(1).gameObject.GetComponent<wordBank_ClassFirst>();
 
     }
 
@@ -43,10 +40,10 @@ public class game_ClassFirst : MonoBehaviour
         if (playerWord.wordLength() > 3) return false;
 
         //check if the word includes the GOLD letter
-        if (playerWord.HasGoldLetter(wordList.GoldenLetter())) return false;
+        if (playerWord.HasGoldLetter(wordBank.GoldenLetter())) return false;
 
         //chcek if the word is an actual word (from the list)
-        return wordList.IsWordInList(playerWord);
+        return wordBank.IsWordInList(playerWord.ToString()) ;
 
     }
 
@@ -55,13 +52,13 @@ public class game_ClassFirst : MonoBehaviour
     //button onclick events
     public void LeftTopButtonClick()
     {
-        playerWord.AddLetter(wordList.getLetter(1));
+        playerWord.AddLetter(wordBank.getLetter(1));
         Debug.Log(playerWord.GetWord());
     }
 
     public void LeftBottomButtonClick()
     {
-        playerWord.AddLetter(wordList.getLetter(2));
+        playerWord.AddLetter(wordBank.getLetter(2));
     }
 
 
@@ -69,12 +66,12 @@ public class game_ClassFirst : MonoBehaviour
 
     public void RightTopButtonClick()
     {
-        playerWord.AddLetter(wordList.getLetter(3));
+        playerWord.AddLetter(wordBank.getLetter(3));
     }
 
     public void RightBottomButtonClick()
     {
-        playerWord.AddLetter(wordList.getLetter(4));
+        playerWord.AddLetter(wordBank.getLetter(4));
     }
 
 
@@ -82,17 +79,17 @@ public class game_ClassFirst : MonoBehaviour
 
     public void MiddleTopButtonClick()
     {
-        playerWord.AddLetter(wordList.getLetter(5));
+        playerWord.AddLetter(wordBank.getLetter(5));
     }
 
     public void MiddleMiddleButtonClick()
     {
-        playerWord.AddLetter(wordList.GoldenLetter());
+        playerWord.AddLetter(wordBank.GoldenLetter());
     }
 
     public void MiddleBottomButtonClick()
     {
-        playerWord.AddLetter(wordList.getLetter(6));
+        playerWord.AddLetter(wordBank.getLetter(6));
     }
   
 }
