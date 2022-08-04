@@ -28,7 +28,8 @@ public class word_ClassFirst : MonoBehaviour
     //get/return the word of the player
     public string GetWord()
     {
-        return word.ToString();
+        string str = string.Join("", word);
+        return str;
     }
 
     //will add a letter at the end of a word

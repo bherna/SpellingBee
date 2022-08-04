@@ -26,7 +26,6 @@ public class game_ClassFirst : MonoBehaviour
     private void Start()
     {
         playerWord = GameObject.Find("game").transform.GetChild(0).gameObject.GetComponent<word_ClassFirst>();
-        if (playerWord != null) { Debug.Log("adfsd" + playerWord.GetWord().ToString()); }
 
         wordBank = GameObject.Find("game").transform.GetChild(1).gameObject.GetComponent<wordBank_ClassFirst>();
 
@@ -43,22 +42,28 @@ public class game_ClassFirst : MonoBehaviour
         if (playerWord.HasGoldLetter(wordBank.GoldenLetter())) return false;
 
         //chcek if the word is an actual word (from the list)
-        return wordBank.IsWordInList(playerWord.ToString()) ;
+        return wordBank.IsWordInList(playerWord.GetWord()) ;
 
     }
 
+
+    //button click function
+    private void ButtonClick(int element)
+    {
+        playerWord.AddLetter(wordBank.getLetter(element));
+        playerWord_text.text = playerWord.GetWord();
+    }
 
 
     //button onclick events
     public void LeftTopButtonClick()
     {
-        playerWord.AddLetter(wordBank.getLetter(1));
-        Debug.Log(playerWord.GetWord());
+        ButtonClick(1);
     }
 
     public void LeftBottomButtonClick()
     {
-        playerWord.AddLetter(wordBank.getLetter(2));
+        ButtonClick(2);
     }
 
 
@@ -66,12 +71,12 @@ public class game_ClassFirst : MonoBehaviour
 
     public void RightTopButtonClick()
     {
-        playerWord.AddLetter(wordBank.getLetter(3));
+        ButtonClick(3);
     }
 
     public void RightBottomButtonClick()
     {
-        playerWord.AddLetter(wordBank.getLetter(4));
+        ButtonClick(4);
     }
 
 
@@ -79,17 +84,17 @@ public class game_ClassFirst : MonoBehaviour
 
     public void MiddleTopButtonClick()
     {
-        playerWord.AddLetter(wordBank.getLetter(5));
+        ButtonClick(5);
     }
 
     public void MiddleMiddleButtonClick()
     {
-        playerWord.AddLetter(wordBank.GoldenLetter());
+        ButtonClick(0);
     }
 
     public void MiddleBottomButtonClick()
     {
-        playerWord.AddLetter(wordBank.getLetter(6));
+        ButtonClick(6);
     }
   
 }
