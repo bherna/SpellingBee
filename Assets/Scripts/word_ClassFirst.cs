@@ -47,7 +47,11 @@ public class word_ClassFirst : MonoBehaviour
     //will remove the last letter of a word only
     public void DelLetter()
     {
-        word.RemoveAt(-1);
+        if(word.Count > 0)
+        {
+            word.RemoveAt(word.Count - 1);
+        }
+        
     }
 
 

@@ -70,7 +70,33 @@ public class wordBank_ClassFirst : MonoBehaviour
         
     }
 
+    public void Shuffle()
+    {
 
+        //create a temperary list
+        List<char> temp = new List<char>();
+
+        //random temp int
+        int element = 0;
+
+        //first element needs to be the golden letter
+        temp.Add(letteresList[0]);
+        letteresList.RemoveAt(0);
+
+        for(int i = 0; i < 6; i++)
+        {
+            //update random number within list range
+            element = Random.Range(0, letteresList.Count);
+
+            //add to new list and remove
+            temp.Add(letteresList[element]);
+            letteresList.RemoveAt(element);
+
+        }
+
+        //update letterlist with new shuffled list
+        letteresList = temp;
+    }
 
 
     

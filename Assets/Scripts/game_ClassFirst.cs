@@ -42,6 +42,9 @@ public class game_ClassFirst : MonoBehaviour
         wordBank = GameObject.Find("Game").transform.GetChild(1).gameObject.GetComponent<wordBank_ClassFirst>();
 
 
+        //update player word text
+        playerWord_text.text = "";
+
         //update button text
         UpdateButtonsText();
   
@@ -91,15 +94,34 @@ public class game_ClassFirst : MonoBehaviour
 
 
 
-    //button click function
+    //button click function 
     private void ButtonClick(int element)
     {
         playerWord.AddLetter(wordBank.getLetter(element));
         playerWord_text.text = playerWord.GetWord();
     }
 
+    public void DeletePlayerChar()
+    {
+        //remove last letter
+        playerWord.DelLetter();
 
-    //button onclick events
+        //update text
+        playerWord_text.text = playerWord.GetWord();
+    }
+
+    public void ShuffleLetters()
+    {
+        //shuffle list
+        wordBank.Shuffle();
+
+        //update buttons text
+        UpdateButtonsText();
+    }
+
+
+    ////button onclick events
+
     public void LeftTopButtonClick()
     {
         ButtonClick(1);
