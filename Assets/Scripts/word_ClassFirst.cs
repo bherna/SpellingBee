@@ -54,6 +54,10 @@ public class word_ClassFirst : MonoBehaviour
         
     }
 
+    public void ResetWord()
+    {
+        word.Clear();
+    }
 
     //checks if the word currently has the gold letter
     public bool HasGoldLetter(char goldLetter)

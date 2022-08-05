@@ -18,12 +18,16 @@ public class game_ClassFirst : MonoBehaviour
     //holds the game's usable letters and words
     [SerializeField] wordBank_ClassFirst wordBank;
 
+
+    [Header("Just Text variables")]
     //displays the players current word
     public TMP_Text playerWord_text;
 
+    //display words found by the player
+    public TMP_Text wordsFound_text;
 
     //button text
-    [SerializeField]
+    [Header("Letter Buttons")]
     public TMP_Text m_m;
     public TMP_Text l_t;
     public TMP_Text l_b;
@@ -33,6 +37,9 @@ public class game_ClassFirst : MonoBehaviour
     public TMP_Text m_b;
 
 
+    //words found list
+    private List<string> wordsFound;
+
     private void Start()
     {
 
@@ -41,6 +48,10 @@ public class game_ClassFirst : MonoBehaviour
 
         wordBank = GameObject.Find("Game").transform.GetChild(1).gameObject.GetComponent<wordBank_ClassFirst>();
 
+
+        //update words found text
+        wordsFound_text.text = "";
+        wordsFound = new List<string>();
 
         //update player word text
         playerWord_text.text = "";
@@ -52,18 +63,48 @@ public class game_ClassFirst : MonoBehaviour
 
 
     //returns true if the word is a valid word (from the list of words)
-    public bool CheckWord()
+    public void CheckWord()
     {
         // check if the word is long enough (than three letters)
-        if (playerWord.wordLength() > 3) return false;
+        if (playerWord.wordLength() > 3)
+        {
+            //check if the word includes the GOLD letter
+            if (playerWord.HasGoldLetter(wordBank.GoldenLetter()))
+            {
+                //check if the word is not already in the list
+                if (! wordsFound.Contains(playerWord.GetWord()))
+                {
+                    //finally, chcek if the word is an actual word (from the list)
+                    if (wordBank.IsWordInList(playerWord.GetWord()))
+                    {
 
-        //check if the word includes the GOLD letter
-        if (playerWord.HasGoldLetter(wordBank.GoldenLetter())) return false;
+                        //add word to found words
+                        wordsFound.Add(playerWord.GetWord());
 
-        //chcek if the word is an actual word (from the list)
-        return wordBank.IsWordInList(playerWord.GetWord()) ;
+                        //update words found text
+                        UpdateWordsFound_Text();
+
+                        //reset player word
+                        playerWord.ResetWord();
+                        playerWord_text.text = "";
+
+                    }
+                } 
+                
+            }
+        }
 
     }
+
+
+    public void UpdateWordsFound_Text()
+    {
+        string temp = string.Join(", ", wordsFound);
+
+        wordsFound_text.text = temp;
+
+    }
+
 
 
     private void UpdateButtonsText()
