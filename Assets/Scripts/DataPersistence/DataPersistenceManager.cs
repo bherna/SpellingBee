@@ -7,12 +7,18 @@ public class DataPersistenceManager : MonoBehaviour
 {
     //this class will be a singleton class
 
+
+    [Header("File Storage Config")]
+    [SerializeField] private string fileName;
+
+
+
     //
     private GameData gameData;
 
     private List<IDataPersistence> dataPersistenceObjects;
 
-
+    private FileDataHandler dataHandler;
 
     public static DataPersistenceManager instance { get; private set; }
 
@@ -29,6 +35,10 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Start()
     {
+        //for reading and writing to file
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+
+        //for loading in objects into the game
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
     }
@@ -48,6 +58,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void LoadGame()
     {
         //load any saved data from a file
+        this.gameData = dataHandler.Load();
 
         //if no data can be loaed,  initizlize to a new game
         if(this.gameData == null)
@@ -62,7 +73,6 @@ public class DataPersistenceManager : MonoBehaviour
             dataPersistenceObj.LoadData(gameData);
         }
 
-        Debug.Log("Load dead count = " + gameData.wordsFoundTotal);
     }
 
     public void SaveGame()
@@ -73,9 +83,9 @@ public class DataPersistenceManager : MonoBehaviour
             dataPersistenceObj.SaveData(ref gameData);
         }
 
-        Debug.Log("Saved death count = " + gameData.wordsFoundTotal);
 
         //save that data to a file using data handler
+        dataHandler.Save(gameData);
     }
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()

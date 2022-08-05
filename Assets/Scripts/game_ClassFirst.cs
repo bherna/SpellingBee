@@ -122,7 +122,7 @@ public class game_ClassFirst : MonoBehaviour, IDataPersistence
     {
         string temp = string.Join(", ", wordsFound);
 
-        wordsFound_text.text = temp;
+        wordsFound_text.text = $"{wordsFoundNum}" + temp;
 
     }
 
