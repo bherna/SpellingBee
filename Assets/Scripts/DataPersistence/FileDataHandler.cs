@@ -13,10 +13,15 @@ public class FileDataHandler
     //data file we want to save to
     private string dataFileName = "";
 
-    public FileDataHandler(string dataDirPath, string dataFileName)
+    private bool useEncryption = false;
+
+    private readonly string encryptionCodeWord = "word";
+
+    public FileDataHandler(string dataDirPath, string dataFileName, bool useEncryption)
     {
         this.dataDirPath = dataDirPath;
         this.dataFileName = dataFileName;
+        this.useEncryption = useEncryption;
     }
 
     public GameData Load()
@@ -42,6 +47,13 @@ public class FileDataHandler
                         dataToLoad = reader.ReadToEnd();
                     }
                 }
+
+                //the optional decrypt step
+                if (useEncryption)
+                {
+                    dataToLoad = EncryptDecrypt(dataToLoad);
+                }
+
 
                 //now deserialize the data from Json back into C# object
                 loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
@@ -72,6 +84,13 @@ public class FileDataHandler
             //serialize the C# game data object into json
             string dataToStore = JsonUtility.ToJson(data, true);
 
+
+            //the optional encrypt data step
+            if (useEncryption)
+            {
+                dataToStore = EncryptDecrypt(dataToStore);
+            }
+
             //write the serialized data to the file
             //using method makes sures we close the file after we are done
             using (FileStream stream = new FileStream(fullPath, FileMode.Create))
@@ -88,6 +107,18 @@ public class FileDataHandler
             Debug.LogError("Error occured when trying to save data to file: " + fullPath + "\n" + e);
         }
 
+    }
+
+
+    // 'simple' implementaion of XOR encryption
+    private string EncryptDecrypt(string data)
+    {
+        string modifiedData = "";
+        for (int i = 0; i < data.Length; i++)
+        {
+            modifiedData += (char)(data[i] ^ encryptionCodeWord[i % encryptionCodeWord.Length]);
+        }
+        return modifiedData;
     }
 
 }

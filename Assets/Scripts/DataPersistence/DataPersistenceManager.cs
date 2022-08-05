@@ -11,6 +11,8 @@ public class DataPersistenceManager : MonoBehaviour
     [Header("File Storage Config")]
     [SerializeField] private string fileName;
 
+    [SerializeField] private bool useEncryption;
+
 
 
     //
@@ -36,7 +38,7 @@ public class DataPersistenceManager : MonoBehaviour
     private void Start()
     {
         //for reading and writing to file
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
 
         //for loading in objects into the game
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
