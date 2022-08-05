@@ -6,7 +6,7 @@ using UnityEngine;
 using TMPro;
 using System;
 
-public class game_ClassFirst : MonoBehaviour
+public class game_ClassFirst : MonoBehaviour, IDataPersistence
 {
 
 
@@ -39,6 +39,10 @@ public class game_ClassFirst : MonoBehaviour
 
     //words found list
     private List<string> wordsFound;
+    private int wordsFoundNum;
+
+
+    
 
     private void Start()
     {
@@ -62,6 +66,22 @@ public class game_ClassFirst : MonoBehaviour
     }
 
 
+
+    //IPersistence functions
+    public void LoadData(GameData data)
+    {
+        //read in what was saved from data object and place it into words found variable
+        this.wordsFoundNum = data.wordsFoundTotal;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        //save the words foundin this game 
+        data.wordsFoundTotal = this.wordsFoundNum;
+    }
+
+
+
     //returns true if the word is a valid word (from the list of words)
     public void CheckWord()
     {
@@ -80,6 +100,7 @@ public class game_ClassFirst : MonoBehaviour
 
                         //add word to found words
                         wordsFound.Add(playerWord.GetWord());
+                        wordsFoundNum = wordsFound.Count;
 
                         //update words found text
                         UpdateWordsFound_Text();
