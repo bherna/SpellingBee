@@ -32,6 +32,7 @@ public class LeaderBoardController : MonoBehaviour
                 Debug.Log("failed to start sessions" + response.Error);
             }
         });
+
     }
 
     public void ShowScores()
